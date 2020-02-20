@@ -1,0 +1,16 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+footer {
+    background-color: #C4C942;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    color: black;
+    transition-duration: 0.5s;
+}
+a:hover{
+    transition-duration: 0.5s;
+    color: crimson;
+}

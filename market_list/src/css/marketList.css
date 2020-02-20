@@ -1,0 +1,44 @@
+.myButton {
+    background-color: #C4C942;
+    border-radius: 28px;
+    border: 1px solid #C4C942;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 10px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2f6627;
+}
+
+.shoppingList {
+    color: black;
+}
+
+.shoppingList {
+    color: black;
+}
+
+.shopping {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.input {
+    block-size: 20px;
+    border-radius: 10px;
+}
+
+.mourrir{
+    list-style-type: none;
+    color: white;
+}
+
+button {
+    margin: 10px;
+    padding: 2px;
+}
