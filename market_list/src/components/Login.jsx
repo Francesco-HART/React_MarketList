@@ -1,8 +1,8 @@
 import React from 'react';
 import '../css/login.css';
-import { connect } from 'react-redux';
-import { userConnect } from '../actions/Action';
-import { Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {userConnect} from '../actions/Action';
+import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component {
 
@@ -37,7 +37,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { state };
+    return {state};
 }
 
 export default connect(mapStateToProps)(Login);

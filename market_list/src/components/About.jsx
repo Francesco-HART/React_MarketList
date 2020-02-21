@@ -9,7 +9,7 @@ export default class About extends React.Component {
                 <h2>Timantène</h2>
                 <p>Marie Tchydemian #aTesSouhaits</p>
                 <p>Francesco Hartmann #lItalien</p>
-                <p>Ilias l'arabe #frontMan</p>
+                <p>Ilias Guechi #frontMan</p>
                 <p>Roman Clavier #FranceVersusItalie</p>
             </div>
         );

@@ -1,7 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import Api from '../api/Api';
-import { Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {get} from '../api/Api';
+import {Redirect} from 'react-router-dom';
+import {addIngredient} from "../actions/Action";
+import '../css/WeCook.css';
 
 class WeCook extends React.Component {
 
@@ -11,30 +13,40 @@ class WeCook extends React.Component {
             recipe: "",
             weCookList: []
         };
-        this.thelist = [];
-        this.caller = null;
     }
 
-    setWeCoke = (list, recipeName) => {
-        console.log("set we cook")
-        this.setState({
-            ...this.state,
-            recipe: recipeName,
-            weCookList: list
-        });
-    }
-
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
+        const searchedText = e.target[0].value;
+        e.target[0].value = "";
         e.preventDefault();
-        console.log("sublit : ", e.target[0].value);
-        if (e.target[0].value.length === 0) {
+        if (searchedText.length === 0) {
             return;
         }
-        return <Api setList={ this.setWeCoke } recipeName={e.target[0].value}/>
+        let list = await get(searchedText);
+        this.setState({
+            ...this.state,
+            recipe: searchedText,
+            weCookList: list
+        })
     }
 
     handleAddAll = (e) => {
-
+        for (let i = 0; i < this.state.weCookList.length; i++) {
+            let isInList = false;
+            for (let j = 0; j < this.props.state.marketList.length; j++) {
+                if (this.state.weCookList[i] === this.props.state.marketList[j]) {
+                    isInList = true;
+                    break;
+                }
+            }
+            if (!isInList) {
+                this.props.dispatch(addIngredient(this.state.weCookList[i]));
+            }
+        }
+        this.setState({
+            ...this.state,
+            weCookList: []
+        })
     }
 
     removeItem = (e) => {
@@ -44,12 +56,11 @@ class WeCook extends React.Component {
             if (e.target.name === this.state.weCookList[i]) {
                 this.setState({
                     ...this.state,
-                    weCookList: this.state.weCookList.filter ( (item, index) => index !== i)
+                    weCookList: this.state.weCookList.filter((item, index) => index !== i)
                 })
                 break;
             }
         }
-
         e.target.name = "";
     }
 
@@ -58,20 +69,20 @@ class WeCook extends React.Component {
             return <Redirect push to='/'/>;
         }
 
-        const list = this.state.weCookList.map(ingredient => {
+        const list = this.state.weCookList.map(recipe => {
             return (
-                <li className="mourrir" key={ingredient}>
-                    {ingredient}
-                    <button name={ingredient} key={ingredient} onClick={ this.removeItem }>Remove</button>
+                <li className="mourrir" key={recipe}>
+                    {recipe}
+                    <button name={recipe} key={recipe} onClick={this.removeItem}>Remove</button>
                 </li>
             );
         });
-        console.log("list : ", list)
 
         return (
             <div>
                 <center>
-                    <form onSubmit={ this.handleSubmit }>
+                    <p className="WeCook"> We Cook: </p>
+                    <form onSubmit={this.handleSubmit}>
                         <p><input type="text" placeholder="Recipe" className='input'/></p>
                     </form>
                 </center>
@@ -79,13 +90,13 @@ class WeCook extends React.Component {
 
                 </center>
                 <center>
-                    { list.length > 0 ?
+                    {list.length > 0 ?
                         <div>
                             <p> {this.state.recipe} </p>
                             <ul className="shoppingList">
-                                { list }
+                                {list}
                             </ul>
-                            <button className="myButton" onClick={ this.handleAddAll }>Add all</button>
+                            <button className="myButton" onClick={this.handleAddAll}>Add all</button>
                         </div>
                         :
                         <p></p>
@@ -99,17 +110,12 @@ class WeCook extends React.Component {
         if (!this.props.state.isConnected) {
             return <Redirect push to='/'/>;
         }
-        console.log("cook did")
-        //this.caller = setInterval(function(){ console.log("the list : ", this.thelist); }, 200);
     }
 
-    componentWillUnmount() {
-        //clearInterval(this.caller);
-    }
 }
 
 const mapStateToProps = (state) => {
-    return { state };
+    return {state};
 }
 
 export default connect(mapStateToProps)(WeCook);

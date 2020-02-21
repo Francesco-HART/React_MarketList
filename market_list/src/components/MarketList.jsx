@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect} from 'react-redux';
-import { addIngredient, removeIngredient, setMarketList } from '../actions/Action';
-import { Redirect/*, withRouter*/ } from "react-router-dom";
+import {connect} from 'react-redux';
+import {addIngredient, removeIngredient, setMarketList, clearList} from '../actions/Action';
+import {Redirect} from "react-router-dom";
 import firebase from '../firebase';
 import '../css/marketList.css';
 
@@ -18,6 +18,10 @@ class MarketList extends React.Component {
             }
         }
         e.target.name = "";
+    }
+
+    handleClear = (e) => {
+        this.props.dispatch(clearList())
     }
 
     addItem = (e) => {
@@ -44,23 +48,24 @@ class MarketList extends React.Component {
             return (
                 <li className="mourrir" key={ingredient}>
                     {ingredient}
-                    <button name={ingredient} key={ingredient} onClick={ this.removeItem }>Remove</button>
+                    <button name={ingredient} key={ingredient} onClick={this.removeItem}>Remove</button>
                 </li>
             );
         });
 
         return (
             <div>
-                <center><p className="shopping"> Shopping list : </p></center>
+                <center><p className="shopping"> Shopping list: </p></center>
                 <center>
-                    <form onSubmit={ this.addItem }>
+                    <form onSubmit={this.addItem}>
                         <input className='input' type='text'/>
                         <button className="myButton">Add</button>
                     </form>
+                    <button className="myButton" onClick={this.handleClear}>Clear list</button>
                 </center>
                 <center>
                     <ul className="shoppingList">
-                        { list }
+                        {list}
                     </ul>
                 </center>
             </div>

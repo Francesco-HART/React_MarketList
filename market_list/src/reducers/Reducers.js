@@ -4,7 +4,7 @@ import firebase from '../firebase';
 const initialState = {
     pseudo: '',
     marketList: [],
-    isConnected : false
+    isConnected: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action) {
             return nextState;
 
         case actions.USER_CONNECT:
-             nextState = {
+            nextState = {
                 ...state,
                 pseudo: action.value,
                 isConnected: true
@@ -43,7 +43,7 @@ export default function reducer(state = initialState, action) {
         case actions.USER_DECONNECTION:
             nextState = {
                 ...state,
-                pseudo : '',
+                pseudo: '',
                 isConnected: false
             };
             return nextState;
@@ -52,6 +52,14 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 marketList: action.value
             };
+            return nextState;
+        case actions.CLEAR_LIST:
+            nextState = {
+                ...state,
+                marketList: []
+            };
+            itemRef = firebase.database().ref(state.pseudo);
+            itemRef.remove();
             return nextState;
         default:
             return state;

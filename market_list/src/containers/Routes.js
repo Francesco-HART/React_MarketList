@@ -24,7 +24,7 @@ export default function Routes() {
                     <MarketList/>
                 </Route>
                 <Route path="/wecook">
-                    <WeCook />
+                    <WeCook/>
                 </Route>
                 <Route path="/about">
                     <About/>

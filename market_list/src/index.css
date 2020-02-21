@@ -8,7 +8,10 @@ body {
   background-image: url("https://zupimages.net/up/20/08/dtz8.jpg ") ;
   background-repeat: no-repeat;
   background-size: cover;
+
 }
+
+button:active { outline: none }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -1,8 +1,8 @@
 import React from 'react';
 import '../css/header.css';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { userDeconnection } from '../actions/Action';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {userDeconnection} from '../actions/Action';
 
 class Header extends React.Component {
     deconnection = (e) => {
@@ -14,9 +14,9 @@ class Header extends React.Component {
             <div>
                 <nav className="headerNav">
                     <h2>Market List</h2>
-                    { this.props.state.pseudo.length !== 0 ?
+                    {this.props.state.pseudo.length !== 0 ?
                         <div>
-                            <div className="trait"> </div>
+                            <div className="trait"></div>
                             <ul>
                                 <li className="despacito"><Link to='/market'>Market</Link></li>
                                 <li className="despacito"><Link to='/wecook'>WeCook</Link></li>
@@ -34,6 +34,6 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { state };
+    return {state};
 }
 export default connect(mapStateToProps)(Header);
